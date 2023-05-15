@@ -1,0 +1,115 @@
+
+{% extends "commonbasehod.html" %}
+{% block content %}
+
+ 
+<style>
+    h1,td{color: rgb(21, 22, 22);
+            padding: 15px;
+            }
+    input{
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        border-style:none;
+        font-size: 15px;
+            } 
+    input[type=password]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em; */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+    input[type=email]{
+        /* color: black; */
+        background-color: rgb(192, 219, 228);
+        height: 50px;
+        /* border-radius: 2.5em;  */
+        font-size: 15px;
+        /* border-color: rgb(15, 15, 15); */
+        border-style:none;
+    }
+
+
+    button{height: 40px;
+            width: 90px;
+            color: black;
+            background-color:cornflowerblue;
+            border-radius: 2em;
+            border-color: aliceblue;
+            margin-left: 250px;
+        }
+    
+    th {
+    background-color:rgb(78, 154, 173);
+    color:wheat;
+    padding: 10px;
+
+}
+    
+</style>
+<div class="formstyle">
+<center>
+    <br>
+    <br>
+<h1>Add Teachers</h1>
+<br>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        <tr><tr>
+            <td><input type="text" required name="name" placeholder="Teacher Name" size="70"></td>
+        </tr>
+        <tr><tr>
+            <td><input type="text" required name="phn" placeholder="Contact Number" pattern="[6789][0-9]{9}" maxlength="10" size="70"></td>
+        </tr>
+        <tr><tr>
+            <td><input type="email" required name="email" placeholder="Email ID" size="65"></td>
+        </tr>  
+            <td><button color="black"><b>ADD</b></button></td>
+        </tr>
+    </table>
+</form>
+</center>
+
+</div>
+<br>
+<br>
+{% if data %}
+<table id="tb" style="width:100%;border-collapse:separate;">
+    <tr>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>CONTACT</th>
+
+      <th colspan="2"></th>
+    </tr>
+    {% for s in data %}
+    <tr>
+        <td >{{s.name}}</td>
+        <td >{{s.email}}</td>
+        <td >{{s.contact}}</td>
+
+       <td><a href="/hoddeleteteacher?id={{s.id}}" style="color:darkgoldenrod">Delete</a></td>
+       <td><a href="/hodupdateteacher?id={{s.id}}" style="color:darkgoldenrod">Update</a></td>
+
+       
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+
+
+
+{% if messages %}
+{% for msg in messages %}
+<script>alert('{{msg}}')</script>
+{% endfor %}
+{% endif %}
+
+
+{% endblock %}

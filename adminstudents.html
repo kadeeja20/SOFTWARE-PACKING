@@ -1,0 +1,98 @@
+{% extends "commonbaseadmin.html" %} {% block content %}
+
+<style>
+	h1,
+	td {
+		color: rgb(21, 22, 22);
+		padding: 15px;
+	}
+	input {
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em;  */
+		border-style: none;
+		font-size: 15px;
+	}
+	input[type='password'] {
+		/* color: black; */
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em; */
+		font-size: 15px;
+		/* border-color: rgb(15, 15, 15); */
+		border-style: none;
+	}
+	input[type='email'] {
+		/* color: black; */
+		background-color: rgb(192, 219, 228);
+		height: 50px;
+		/* border-radius: 2.5em;  */
+		font-size: 15px;
+		/* border-color: rgb(15, 15, 15); */
+		border-style: none;
+	}
+
+	button {
+		height: 40px;
+		width: 90px;
+		color: black;
+		background-color: cornflowerblue;
+		border-radius: 2em;
+		border-color: aliceblue;
+		margin-left: 250px;
+	}
+
+	th {
+		background-color: rgb(78, 154, 173);
+		color: wheat;
+		padding: 10px;
+	}
+</style>
+<div class="formstyle">
+	<br />
+	<br />
+	<center>
+		<h1>Students</h1>
+		{% if data %}
+		<table id="tb" style="width: 100%; border-collapse: separate">
+			<tr>
+				<!-- <th>ID</th> -->
+				<th>REG.NO</th>
+				<th>NAME</th>
+				<th>CONTACT</th>
+				<th>EMAIL</th>
+				<th>SEMESTER</th>
+				<th>YEAR</th>
+				<th>COURSE</th>
+				<th>ACTION</th>
+
+				<th colspan="2"></th>
+			</tr>
+			{% for s in data %}
+			<tr>
+				<td>{{s.regno}}</td>
+				<td>{{s.name}}</td>
+				<td>{{s.contact}}</td>
+				<td>{{s.email}}</td>
+				<td>{{s.semester}}</td>
+				<td>{{s.year}}</td>
+				<td>{{s.course.course}}</td>
+				<td>
+					<a
+						href="/admindeletestudents?id={{s.user.id}}"
+						style="color: darkgoldenrod"
+						>Delete</a
+					>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% endif %}
+	</center>
+
+	{% if messages %} {% for msg in messages %}
+	<script>
+		alert('{{msg}}');
+	</script>
+	{% endfor %} {% endif %} {% endblock %}
+</div>
